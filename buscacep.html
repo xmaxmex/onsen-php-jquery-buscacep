@@ -1,0 +1,53 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+	<link rel="stylesheet" href="css/onsenui.css">
+	<link rel="stylesheet" href="css/onsen-css-components.min.css">
+    <script src="js/onsenui.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+    
+    <script>
+        $(function() { 
+            $("#bt-enviar").click(function() {
+                $.ajax({
+                  type: "POST",
+                  url: "/onsen-buscacep/wscep.php",
+                  data: ({cep: $.trim($("#cep").val()) }),
+                  dataType: "text",
+                  success: function(data) {
+                    $("#cep").val("");
+                    $("#resultado").html(data);
+                  }
+                });
+            });
+        });
+    </script>    
+	    
+  </head>
+  <body>
+    <ons-page>
+	
+      <ons-toolbar>
+        <div class="center">Busca CEP</div>
+        <div class="right"><ons-toolbar-button>Sair</ons-toolbar-button></div>
+      </ons-toolbar>
+	
+	    <div style="text-align: center; margin-top: 30px;">
+			<p>
+				<ons-input id="cep" modifier="underbar" placeholder="Informe seu CEP" float></ons-input>
+			</p>
+			
+			<p style="margin-top: 30px;">
+				<ons-button id="bt-enviar">Pesquisar</ons-button>
+			</p>
+			
+			<div id="resultado"></div>
+			
+		</div>	  	
+
+    </ons-page>
+  </body>
+</html>
+ 
